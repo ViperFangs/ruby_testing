@@ -113,7 +113,10 @@ describe NumberGame do
 
     # Write a test for the following context.
     context 'when given invalid input as argument' do
-      xit 'returns nil' do
+      it 'returns nil' do
+        invalid_input = '-1'
+        verified_input = game_check.verify_input(invalid_input)
+        expect(verified_input).to be_nil
       end
     end
   end
