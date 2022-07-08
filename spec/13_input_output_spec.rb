@@ -232,9 +232,11 @@ describe NumberGame do
       # remove the 'x' before running this test
       it 'outputs correct phrase' do
         message = "That was hard. It took you 5 guesses!\n"
-        #expect { game.final_message }.to output(message).to_stdout
-        expect(game).to recieve(:puts).with(messgae)
-        game.final_message
+        expect { game.final_message }.to output(message).to_stdout
+
+        # Alternative Solution (Remove "\n" from message)
+        # expect(game).to receive(:puts).with(message).once
+        # game.final_message
       end
     end
   end
