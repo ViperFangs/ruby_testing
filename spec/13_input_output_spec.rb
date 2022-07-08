@@ -217,7 +217,8 @@ describe NumberGame do
     # @guess, and @count
     context 'when count is 2-3' do
       # remove the 'x' before running this test
-      xit 'outputs correct phrase' do
+      subject(:game) { described_class.new('9', '9', 3) }
+      it 'outputs correct phrase' do
         congrats_phrase = "Congratulations! You picked the random number in 3 guesses!\n"
         expect { game.final_message }.to output(congrats_phrase).to_stdout
       end
