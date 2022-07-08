@@ -228,8 +228,11 @@ describe NumberGame do
 
     # Write a test for the following context.
     context 'when count is 4 and over' do
+      subject(:game) { described_class.new('7', '7', 5) }
       # remove the 'x' before running this test
-      xit 'outputs correct phrase' do
+      it 'outputs correct phrase' do
+        message = "That was hard. It took you 5 guesses!\n"
+        expect { game.final_message }.to output(message).to_stdout
       end
     end
   end
