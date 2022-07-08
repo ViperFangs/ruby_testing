@@ -176,9 +176,16 @@ describe NumberGame do
     # Write a test for the following context.
     context 'when user inputs two incorrect values, then a valid input' do
       before do
+        incorrect_input_one = 'a'
+        incorrect_input_two = 'b'
+        correct_input = '3'
+
+        allow(game_loop).to receive(:player_input).and_return(incorrect_input_one, incorrect_input_two, correct_input)
       end
 
-      xit 'completes loop and displays error message twice' do
+      it 'completes loop and displays error message twice' do
+        expect(game_loop).to receive(:puts).with('Input error!').twice
+        game_loop.player_turn
       end
     end
   end
