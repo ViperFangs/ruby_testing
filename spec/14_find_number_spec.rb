@@ -272,10 +272,21 @@ describe FindNumber do
     # Write a test for any 'edge cases' that you can think of, for example:
 
     context 'when the guess is 7, min=5, and max=8' do
-      xit 'updates min to the same value as max' do
+      let(:guess) { 7 }
+      subject(:game) { described_class.new(5, 8, number_range, guess) }
+
+      it 'updates min to the same value as max' do
+        max_value = game.max
+        game.update_range
+        min_value = game.min
+        expect(min_value).to eq(max_value)
       end
 
-      xit 'does not update max' do
+      it 'does not update max' do
+        previous_max = game.max
+        game.update_range
+        current_max = game.max
+        expect(previous_max).to eq(current_max)
       end
     end
   end
