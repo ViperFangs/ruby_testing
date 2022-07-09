@@ -15,4 +15,8 @@ class FindNumber
   def make_guess
     ((min + max) / 2).round
   end
+
+  def game_over?
+    guess == answer
+  end
 end
