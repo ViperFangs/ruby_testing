@@ -138,22 +138,38 @@ describe FindNumber do
     # random number double created inside this method's describe block.
 
     context 'when min is 5 and max is 9' do
-      xit 'returns 7' do
+      subject(:game) { described_class.new(5, 9, number_guessing) }
+
+      it 'returns 7' do
+        guess = game.make_guess
+        expect(guess).to eq(7)
       end
     end
 
     context 'when min is 8 and max is 9' do
-      xit 'returns 8' do
+      subject(:game) { described_class.new(8, 9, number_guessing) }
+
+      it 'returns 8' do
+        guess = game.make_guess
+        expect(guess).to eq(8)
       end
     end
 
     context 'when min is 0 and max is 3' do
-      xit 'returns 1' do
+      subject(:game) { described_class.new(0, 3, number_guessing) }
+
+      it 'returns 1' do
+        guess = game.make_guess
+        expect(guess).to eq(1)
       end
     end
 
     context 'when min and max both equal 3' do
-      xit 'returns 3' do
+      subject(:game) { described_class.new(3, 3, number_guessing) }
+
+      it 'returns 3' do
+        guess = game.make_guess
+        expect(guess).to eq(3)
       end
     end
   end
