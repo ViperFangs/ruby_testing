@@ -361,21 +361,34 @@ describe BinaryGame do
     # #display_turn_order will loop until binary_search.game_over?
 
     # Create a new subject and an instance_double for BinarySearch.
+    subject(:binary_game) { described_class.new(0, 100, random_number) }
+    let(:search_display) { instance_double(BinarySearch) }
+    let(:random_number) { instance_double(RandomNumber, value: 25) }
 
     before do
       # You'll need to create a few method stubs.
+      allow(search_display).to receive(:make_guess)
+      allow(binary_game).to receive(:display_guess).with(search_display)
+      allow(search_display).to receive(:update_range)
     end
 
     # Command Method -> Test the change in the observable state
-    xit 'increases guess_count by one' do
+    it 'increases guess_count by one' do
+      binary_game.display_turn_order(search_display)
+      guess_count = binary_game.instance_variable_get(:@guess_count)
+      expect(guess_count).to eq(1)
     end
 
     # Method with Outgoing Command -> Test that a message is sent
-    xit 'sends make_guess' do
+    it 'sends make_guess' do
+      expect(search_display).to receive(:make_guess).once
+      binary_game.display_turn_order(search_display)
     end
 
     # Method with Outgoing Command -> Test that a message is sent
-    xit 'sends update_range' do
+    it 'sends update_range' do
+      expect(search_display).to receive(:update_range).once
+      binary_game.display_turn_order(search_display)
     end
 
     # Using method expectations can be confusing. Stubbing the methods above
