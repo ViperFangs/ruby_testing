@@ -82,7 +82,7 @@ describe CaesarBreaker do
 
       it 'sends message to check the existance of the 16_cipher directory' do
         dir_name = '16_cipher'
-        expect(Dir).to receive(:exist?).with(dir_name).once
+        expect(Dir).to receive(:exist?).with(dir_name).once.and_return(false)
         phrase.save_decrypted_messages
       end
 
@@ -104,15 +104,26 @@ describe CaesarBreaker do
     # Method with Outgoing Commands -> Test that the messages are sent
     context 'when the directory exists' do
       before do
+        allow(Dir).to receive(:exist?).and_return(true)
+        allow(File).to receive(:open)
+        allow(phrase).to receive(:display_file_location)
       end
 
-      xit 'sends message to check the existance of the 16_cipher directory' do
+      it 'sends message to check the existance of the 16_cipher directory' do
+        dir_name = '16_cipher'
+        expect(Dir).to receive(:exist?).with(dir_name).once.and_return(true)
+        phrase.save_decrypted_messages
       end
 
-      xit 'does not send message to create a directory' do
+      it 'does not send message to create a directory' do
+        dir_name = '16_cipher'
+        expect(Dir).not_to receive(:mkdir).with(dir_name)
+        phrase.save_decrypted_messages
       end
 
-      xit 'sends message to create a file' do
+      it 'sends message to create a file' do
+        expect(File).to receive(:open).once
+        phrase.save_decrypted_messages
       end
     end
 
