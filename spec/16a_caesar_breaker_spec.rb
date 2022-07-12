@@ -80,13 +80,21 @@ describe CaesarBreaker do
       # ASSIGNMENT #2
       # Write the following 3 tests:
 
-      xit 'sends message to check the existance of the 16_cipher directory' do
+      it 'sends message to check the existance of the 16_cipher directory' do
+        dir_name = '16_cipher'
+        expect(Dir).to receive(:exist?).with(dir_name).once
+        phrase.save_decrypted_messages
       end
 
-      xit 'sends message to create a directory' do
+      it 'sends message to create a directory' do
+        dir_name = '16_cipher'
+        expect(Dir).to receive(:mkdir).with(dir_name).once
+        phrase.save_decrypted_messages
       end
 
-      xit 'sends message to create a file' do
+      it 'sends message to create a file' do
+        expect(File).to receive(:open).once
+        phrase.save_decrypted_messages
       end
     end
 
